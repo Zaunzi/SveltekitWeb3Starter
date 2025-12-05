@@ -1,12 +1,20 @@
 <!doctype html>
-<html data-theme="mint" data-mode="dark" lang="en">
+<html data-theme="cerberus" data-mode="dark" lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" href="/favicon.svg" />
 		<script>
-			// Initialize theme from localStorage
-			const mode = localStorage.getItem('mode') || 'dark';
+			// Initialize theme and mode from localStorage before page render
+			const FALLBACK_THEME = 'mint';
+			const FALLBACK_MODE = 'dark';
+			
+			const storedTheme = localStorage.getItem('theme');
+			const theme = storedTheme ?? FALLBACK_THEME;
+			document.documentElement.setAttribute('data-theme', theme);
+			
+			const storedMode = localStorage.getItem('mode');
+			const mode = storedMode ?? FALLBACK_MODE;
 			document.documentElement.setAttribute('data-mode', mode);
 		</script>
 		%sveltekit.head%

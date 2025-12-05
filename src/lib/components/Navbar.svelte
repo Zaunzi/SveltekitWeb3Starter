@@ -1,6 +1,7 @@
 <script lang="ts">
 	import WalletStatus from './WalletStatus.svelte';
 	import LightSwitch from './LightSwitch.svelte';
+	import ThemeSwitcher from './ThemeSwitcher.svelte';
 </script>
 
 <nav class="navbar bg-surface-50 dark:bg-surface-900 shadow-sm">
@@ -18,9 +19,12 @@
 				</a>
 			</div>
 
-			<!-- Right Section: Theme Switch + Wallet Status -->
+			<!-- Right Section: Theme Switcher + Light Switch + Wallet Status -->
 			<div class="flex items-center space-x-2 md:space-x-4">
-				<!-- Theme Switch -->
+				<!-- Theme Switcher -->
+				<ThemeSwitcher />
+				
+				<!-- Theme Switch (Light/Dark Mode) -->
 				<LightSwitch />
 				
 				<!-- Wallet Status -->
