@@ -81,10 +81,10 @@
 			<Loader2 class="w-4 h-4 animate-spin" />
 			<span>Processing...</span>
 		{:else if txStatus === 'success'}
-			<CheckCircle class="w-4 h-4 text-green-500" />
+			<CheckCircle class="w-4 h-4 text-success-500" />
 			<span>Success!</span>
 		{:else if txStatus === 'error'}
-			<XCircle class="w-4 h-4 text-red-500" />
+			<XCircle class="w-4 h-4 text-error-500" />
 			<span>Failed</span>
 		{:else}
 			<span>{children}</span>
@@ -92,7 +92,7 @@
 	</button>
 
 	{#if error}
-		<div class="text-xs text-red-600 dark:text-red-400 text-center">
+		<div class="text-xs text-error-600 dark:text-error-400 text-center">
 			{error}
 		</div>
 	{/if}
