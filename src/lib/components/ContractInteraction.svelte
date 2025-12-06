@@ -3,7 +3,7 @@
 	import { browser } from '$app/environment';
 	import { ethers } from 'ethers';
 	import { createEventDispatcher } from 'svelte';
-	import { Loader2, CheckCircle, XCircle } from '@lucide/svelte';
+	import { Loader2, Circle, XCircle } from '@lucide/svelte';
 
 	interface Props {
 		contractAddress: string;
@@ -98,10 +98,10 @@
 			<Loader2 class="w-4 h-4 animate-spin" />
 			<span>Processing...</span>
 		{:else if txStatus === 'success'}
-			<CheckCircle class="w-4 h-4 text-green-500" />
+			<Circle class="w-4 h-4 text-success-500" />
 			<span>Success!</span>
 		{:else if txStatus === 'error'}
-			<XCircle class="w-4 h-4 text-red-500" />
+			<XCircle class="w-4 h-4 text-error-500" />
 			<span>Failed</span>
 		{:else}
 			{@render children()}
@@ -109,8 +109,8 @@
 	</button>
 
 	{#if error}
-		<div class="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-			<p class="text-sm text-red-700 dark:text-red-300">{error}</p>
+		<div class="p-3 bg-error-50 dark:bg-error-900/20 border border-error-200 dark:border-error-800 rounded-lg">
+			<p class="text-sm text-error-700 dark:text-error-300">{error}</p>
 		</div>
 	{/if}
 

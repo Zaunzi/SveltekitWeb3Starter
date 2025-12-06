@@ -4,7 +4,7 @@ This guide will help you set up and customize the SvelteKit Web3 Starter templat
 
 ## Prerequisites
 
-- Node.js 18 or higher
+- Node.js ^20.19 || ^22.12 || >=24 or higher
 - npm or yarn package manager
 - A Reown Cloud project ID (free at [cloud.reown.com](https://cloud.reown.com/))
 
@@ -14,7 +14,7 @@ This guide will help you set up and customize the SvelteKit Web3 Starter templat
    ```bash
    git clone <your-repo-url>
    cd template
-   npm install
+   pnpm i
    ```
 
 2. **Set up environment variables**

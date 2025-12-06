@@ -21,7 +21,7 @@ A production-ready SvelteKit template for building Web3 dApps with Reown AppKit,
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js ^20.19 || ^22.12 || >=24+ 
 - npm or yarn
 - A Reown Cloud project ID
 
@@ -35,7 +35,7 @@ A production-ready SvelteKit template for building Web3 dApps with Reown AppKit,
 
 2. **Install dependencies**
    ```bash
-   npm install
+   pnpm i
    ```
 
 3. **Set up environment variables**
