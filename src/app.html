@@ -8,11 +8,11 @@
 			// Initialize theme and mode from localStorage before page render
 			const FALLBACK_THEME = 'mint';
 			const FALLBACK_MODE = 'dark';
-			
+
 			const storedTheme = localStorage.getItem('theme');
 			const theme = storedTheme ?? FALLBACK_THEME;
 			document.documentElement.setAttribute('data-theme', theme);
-			
+
 			const storedMode = localStorage.getItem('mode');
 			const mode = storedMode ?? FALLBACK_MODE;
 			document.documentElement.setAttribute('data-mode', mode);

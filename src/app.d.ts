@@ -10,4 +10,4 @@ declare global {
 	}
 }
 
-export {};
+export type TxStatusEnums = 'pending' | 'success' | 'error' | null;

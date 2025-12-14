@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @import '@skeletonlabs/skeleton';
-@import '@skeletonlabs/skeleton/optional/presets';
+@import '@skeletonlabs/skeleton-svelte';
 
 /* Import all Skeleton themes */
 @import '@skeletonlabs/skeleton/themes/catppuccin';
@@ -28,25 +28,24 @@
 @import '@skeletonlabs/skeleton/themes/wintry';
 
 /* Configure Tailwind dark mode to use data attribute strategy */
-@custom-variant dark (&:where([data-mode=dark], [data-mode=dark] *));
+/* @custom-variant dark (&:where([data-mode=dark], [data-mode=dark] *)); */
 
 /* stylelint-disable-next-line at-rule-no-unknown */
-@source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
+/* @source '../node_modules/@skeletonlabs/skeleton-svelte/dist'; */
 
 /* Global overflow protection */
-html, body {
-  overflow-x: hidden;
-  max-width: 100vw;
+html,
+body {
+	overflow-x: hidden;
+	max-width: 100vw;
 }
 
 /* Prevent any element from causing horizontal overflow */
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 /* Container overflow protection */
 .container {
-  max-width: 100%;
+	max-width: 100%;
 }
-
-

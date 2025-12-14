@@ -3,12 +3,12 @@
 	import { browser } from '$app/environment';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import { FALLBACK_THEME } from '$lib/constants/themes';
-	
+
 	// Initialize theme and mode on layout load
 	if (browser) {
 		const mode = localStorage.getItem('mode') || 'dark';
 		document.documentElement.setAttribute('data-mode', mode);
-		
+
 		const theme = localStorage.getItem('theme') || FALLBACK_THEME;
 		document.documentElement.setAttribute('data-theme', theme);
 	}

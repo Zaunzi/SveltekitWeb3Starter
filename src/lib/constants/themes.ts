@@ -1,93 +1,92 @@
 export const themes = [
 	{
 		name: 'catppuccin',
-		emoji: '🐈',
+		emoji: '🐈'
 	},
 	{
 		name: 'cerberus',
-		emoji: '🐺',
+		emoji: '🐺'
 	},
 	{
 		name: 'concord',
-		emoji: '🤖',
+		emoji: '🤖'
 	},
 	{
 		name: 'crimson',
-		emoji: '🔴',
+		emoji: '🔴'
 	},
 	{
 		name: 'fennec',
-		emoji: '🦊',
+		emoji: '🦊'
 	},
 	{
 		name: 'hamlindigo',
-		emoji: '👔',
+		emoji: '👔'
 	},
 	{
 		name: 'legacy',
-		emoji: '💀',
+		emoji: '💀'
 	},
 	{
 		name: 'mint',
-		emoji: '🍃',
+		emoji: '🍃'
 	},
 	{
 		name: 'modern',
-		emoji: '🌸',
+		emoji: '🌸'
 	},
 	{
 		name: 'mona',
-		emoji: '🐙',
+		emoji: '🐙'
 	},
 	{
 		name: 'nosh',
-		emoji: '🥙',
+		emoji: '🥙'
 	},
 	{
 		name: 'nouveau',
-		emoji: '👑',
+		emoji: '👑'
 	},
 	{
 		name: 'pine',
-		emoji: '🌲',
+		emoji: '🌲'
 	},
 	{
 		name: 'reign',
-		emoji: '📒',
+		emoji: '📒'
 	},
 	{
 		name: 'rocket',
-		emoji: '🚀',
+		emoji: '🚀'
 	},
 	{
 		name: 'rose',
-		emoji: '🌷',
+		emoji: '🌷'
 	},
 	{
 		name: 'sahara',
-		emoji: '🏜️',
+		emoji: '🏜️'
 	},
 	{
 		name: 'seafoam',
-		emoji: '🧜‍♀️',
+		emoji: '🧜‍♀️'
 	},
 	{
 		name: 'terminus',
-		emoji: '🌑',
+		emoji: '🌑'
 	},
 	{
 		name: 'vintage',
-		emoji: '📺',
+		emoji: '📺'
 	},
 	{
 		name: 'vox',
-		emoji: '👾',
+		emoji: '👾'
 	},
 	{
 		name: 'wintry',
-		emoji: '🌨️',
-	},
+		emoji: '🌨️'
+	}
 ] as const;
 
 export const FALLBACK_THEME = 'mint';
-

@@ -1,35 +1,45 @@
 {
-	"name": "template",
-	"private": true,
+	"name": "sveltekit-ethers-template",
+	"private": false,
 	"version": "0.0.1",
 	"type": "module",
+	"lint-staged": {
+		"*.{js,ts,cjs,mjs,svelte,html,md,mdx,json,css}": [
+			"prettier --write --plugin-search-dir=."
+		]
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+		"prepare": "husky",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json && prettier --check .",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@skeletonlabs/skeleton": "^3.1.7",
-		"@skeletonlabs/skeleton-svelte": "^1.3.1",
-		"@sveltejs/adapter-auto": "^6.0.0",
-		"@sveltejs/kit": "^2.22.0",
-		"@sveltejs/vite-plugin-svelte": "^6.0.0",
-		"@tailwindcss/vite": "^4.0.0",
-		"@types/matter-js": "^0.20.0",
-		"svelte": "^5.0.0",
-		"svelte-check": "^4.0.0",
-		"tailwindcss": "^4.0.0",
-		"typescript": "^5.0.0",
-		"vite": "^7.0.4"
+		"@skeletonlabs/skeleton": "^4.7.4",
+		"@skeletonlabs/skeleton-svelte": "^4.7.4",
+		"@sveltejs/adapter-auto": "^7.0.0",
+		"@sveltejs/kit": "^2.49.1",
+		"@sveltejs/vite-plugin-svelte": "^6.2.1",
+		"@tailwindcss/vite": "^4.1.17",
+		"@types/matter-js": "^0.20.2",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7",
+		"prettier": "^3.7.4",
+		"prettier-plugin-tailwindcss": "^0.7.2",
+		"svelte": "^5.45.6",
+		"svelte-check": "^4.3.4",
+		"tailwindcss": "^4.1.17",
+		"typescript": "^5.9.3",
+		"vite": "^7.2.6"
 	},
 	"dependencies": {
-		"@lucide/svelte": "^0.536.0",
-		"@reown/appkit": "^1.7.18",
-		"@reown/appkit-adapter-ethers": "^1.7.18",
-		"ethers": "^6.15.0",
+		"@lucide/svelte": "^0.556.0",
+		"@reown/appkit": "^1.8.14",
+		"@reown/appkit-adapter-ethers": "^1.8.14",
+		"ethers": "^6.16.0",
 		"matter-js": "^0.20.0"
 	}
 }

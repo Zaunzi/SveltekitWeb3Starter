@@ -12,7 +12,7 @@
 	function formatBalance(balance: string, decimals: number = 18): string {
 		const formatted = ethers.formatEther(balance);
 		const num = parseFloat(formatted);
-		
+
 		if (num === 0) return '0';
 		if (num < 0.0001) return '< 0.0001';
 		if (num < 1) return num.toFixed(4);
@@ -22,7 +22,7 @@
 
 	// Fetch balance
 	async function fetchBalance() {
-		if (!$account.address || !$network.chainId) {
+		if (!$account.address || (!$network.chainId as boolean)) {
 			isLoading = false;
 			return;
 		}
@@ -30,7 +30,7 @@
 		try {
 			isLoading = true;
 			error = '';
-			
+
 			const provider = walletActions.getProvider();
 			if (!provider) {
 				throw new Error('No provider available');
@@ -48,7 +48,7 @@
 	}
 
 	// Refetch balance when account or network changes
-	$: if ($account.address && $network.chainId) {
+	$: if ($account.address && ($network.chainId as number)) {
 		fetchBalance();
 	}
 
@@ -59,15 +59,20 @@
 
 <div class="flex items-center space-x-2">
 	{#if $account.isConnected && $network.chainId}
-		<div class="flex items-center space-x-1 px-2 py-1 bg-surface-100 dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-md">
+		<div
+			class="flex items-center space-x-1 rounded-md border border-surface-200 bg-surface-100 px-2 py-1 dark:border-surface-700 dark:bg-surface-800"
+		>
 			{#if isLoading}
-				<div class="w-3 h-3 border-2 border-surface-300 dark:border-surface-600 border-t-primary-500 rounded-full animate-spin"></div>
+				<div
+					class="h-3 w-3 animate-spin rounded-full border-2 border-surface-300 border-t-primary-500 dark:border-surface-600"
+				></div>
 				<span class="text-xs text-surface-600 dark:text-surface-400">Loading...</span>
 			{:else if error}
-				<span class="text-xs text-red-600 dark:text-red-400">Error</span>
+				<span class="text-xs text-error-600 dark:text-error-400">Error</span>
 			{:else}
-				<span class="text-xs font-mono text-surface-700 dark:text-surface-300">
-					{formatBalance(balance)} {getChainInfo($network.chainId).symbol}
+				<span class="font-mono text-xs text-surface-700 dark:text-surface-300">
+					{formatBalance(balance)}
+					{getChainInfo($network.chainId as number).symbol}
 				</span>
 			{/if}
 		</div>
