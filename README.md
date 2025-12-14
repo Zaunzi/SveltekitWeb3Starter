@@ -21,34 +21,39 @@ A production-ready SvelteKit template for building Web3 dApps with Reown AppKit,
 
 ### Prerequisites
 
-- Node.js ^20.19 || ^22.12 || >=24+ 
+- Node.js ^20.19 || ^22.12 || >=24+
 - npm or yarn
 - A Reown Cloud project ID
 
 ### Setup
 
 1. **Clone this repository**
+
    ```bash
    git clone <your-repo-url>
    cd template
    ```
 
 2. **Install dependencies**
+
    ```bash
    pnpm i
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env
    ```
-   
+
    Get your project ID from [Reown Cloud](https://cloud.reown.com/) and add it to `.env`:
-   ```
+
+   ```bash
    VITE_PROJECT_ID=your_project_id_here
    ```
 
 4. **Start the development server**
+
    ```bash
    npm run dev
    ```
@@ -58,7 +63,7 @@ A production-ready SvelteKit template for building Web3 dApps with Reown AppKit,
 
 ## Project Structure
 
-```
+```text
 src/
 ├── lib/
 │   ├── components/
@@ -98,8 +103,8 @@ import { account, network, isWalletConnected, walletActions } from '$lib/stores/
 
 // Check if wallet is connected
 if ($isWalletConnected) {
-  console.log('Connected to:', $account.address);
-  console.log('Network:', $network.chainId);
+	console.log('Connected to:', $account.address);
+	console.log('Network:', $network.chainId);
 }
 
 // Open wallet modal
@@ -118,12 +123,12 @@ import { ethers } from 'ethers';
 import { walletActions } from '$lib/stores/walletStore';
 
 async function getBalance() {
-  const provider = walletActions.getProvider();
-  if (provider) {
-    const ethersProvider = new ethers.BrowserProvider(provider);
-    const balance = await ethersProvider.getBalance(address);
-    return ethers.formatEther(balance);
-  }
+	const provider = walletActions.getProvider();
+	if (provider) {
+		const ethersProvider = new ethers.BrowserProvider(provider);
+		const balance = await ethersProvider.getBalance(address);
+		return ethers.formatEther(balance);
+	}
 }
 ```
 
@@ -137,7 +142,7 @@ import { modal } from '$lib/config/appkit';
 // Switch to dark mode
 modal.setThemeMode('dark');
 
-// Switch to light mode  
+// Switch to light mode
 modal.setThemeMode('light');
 ```
 
@@ -164,7 +169,7 @@ Update `src/lib/config/appkit.ts`:
 import { polygon, polygonMumbai } from '@reown/appkit/networks';
 
 // Add to networks array
-networks: [base, baseSepolia, polygon, polygonMumbai]
+networks: [base, baseSepolia, polygon, polygonMumbai];
 ```
 
 ### Custom Themes
@@ -178,6 +183,7 @@ Create new components in `src/lib/components/` and import them where needed.
 ## Available Components
 
 ### WalletStatus.svelte
+
 Main wallet connection component with network status, address display, and disconnect functionality.
 
 ```svelte
@@ -185,6 +191,7 @@ Main wallet connection component with network status, address display, and disco
 ```
 
 ### ETHBalance.svelte
+
 Shows the current ETH balance for the connected wallet.
 
 ```svelte
@@ -192,6 +199,7 @@ Shows the current ETH balance for the connected wallet.
 ```
 
 ### NetworkStatus.svelte
+
 Displays current network status and online/offline state.
 
 ```svelte
@@ -199,29 +207,30 @@ Displays current network status and online/offline state.
 ```
 
 ### TransactionButton.svelte
+
 Handles transaction sending with loading states and error handling.
 
 ```svelte
-<TransactionButton>
-  Send Transaction
-</TransactionButton>
+<TransactionButton>Send Transaction</TransactionButton>
 ```
 
 ### ContractInteraction.svelte
+
 Generic component for interacting with smart contracts.
 
 ```svelte
-<ContractInteraction 
-  contractAddress="0x..." 
-  abi={contractABI} 
-  functionName="transfer"
-  args={[recipient, amount]}
+<ContractInteraction
+	contractAddress="0x..."
+	abi={contractABI}
+	functionName="transfer"
+	args={[recipient, amount]}
 >
-  Transfer Tokens
+	Transfer Tokens
 </ContractInteraction>
 ```
 
 ### LightSwitch.svelte
+
 Theme toggle component for switching between light and dark modes.
 
 ```svelte

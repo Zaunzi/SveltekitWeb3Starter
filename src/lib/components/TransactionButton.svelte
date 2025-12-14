@@ -1,21 +1,23 @@
 <script lang="ts">
+	// TODO: replace this depreciated method with https://svelte.dev/docs/svelte/v5-migration-guide#Event-changes-Component-events
 	import { createEventDispatcher } from 'svelte';
-	import { account, network, isChainSupported } from '$lib/stores/walletStore';
+	import { account, network, isChainSupported, getChainInfo } from '$lib/stores/walletStore';
 	import { walletActions } from '$lib/stores/walletStore';
 	import { ethers } from 'ethers';
-	import { Loader2, CheckCircle, XCircle } from '@lucide/svelte';
+	import { LoaderCircle, Check, CircleOff } from '@lucide/svelte';
+	import type { TxStatusEnums } from '../../app';
 
 	let { disabled = false, loading = false, children = 'Send Transaction' } = $props();
 
 	const dispatch = createEventDispatcher();
 
-	let txHash = '';
-	let txStatus: 'pending' | 'success' | 'error' | null = null;
-	let error = '';
+	let txHash: string = $state('');
+	let txStatus: TxStatusEnums = $state(null);
+	let error = $state('');
 
 	// Example transaction function - customize this for your needs
 	async function sendTransaction() {
-		if (!$account.address || !$network.chainId || !isChainSupported($network.chainId)) {
+		if (!$account.address || !$network.chainId || !isChainSupported($network.chainId as number)) {
 			error = 'Please connect wallet and switch to a supported network';
 			return;
 		}
@@ -47,7 +49,6 @@
 
 			// Wait for confirmation
 			await tx.wait();
-			
 		} catch (err) {
 			error = err instanceof Error ? err.message : 'Transaction failed';
 			txStatus = 'error';
@@ -65,7 +66,7 @@
 				txStatus = null;
 				txHash = '';
 			}, 5000);
-			
+
 			return () => clearTimeout(timer);
 		}
 	});
@@ -74,17 +75,20 @@
 <div class="flex flex-col space-y-2">
 	<button
 		onclick={sendTransaction}
-		disabled={disabled || loading || !$account.isConnected || !isChainSupported($network.chainId)}
-		class="flex items-center justify-center space-x-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 disabled:bg-surface-300 dark:disabled:bg-surface-700 text-white disabled:text-surface-500 dark:disabled:text-surface-400 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md disabled:shadow-none"
+		disabled={disabled ||
+			loading ||
+			!$account.isConnected ||
+			!isChainSupported($network.chainId as number)}
+		class="flex items-center justify-center space-x-2 rounded-lg bg-primary-500 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-primary-600 hover:shadow-md disabled:bg-surface-300 disabled:text-surface-500 disabled:shadow-none dark:disabled:bg-surface-700 dark:disabled:text-surface-400"
 	>
 		{#if loading}
-			<Loader2 class="w-4 h-4 animate-spin" />
+			<LoaderCircle class="h-4 w-4 animate-spin" />
 			<span>Processing...</span>
 		{:else if txStatus === 'success'}
-			<CheckCircle class="w-4 h-4 text-success-500" />
+			<Check class="h-4 w-4 text-success-500" />
 			<span>Success!</span>
 		{:else if txStatus === 'error'}
-			<XCircle class="w-4 h-4 text-error-500" />
+			<CircleOff class="h-4 w-4 text-error-500" />
 			<span>Failed</span>
 		{:else}
 			<span>{children}</span>
@@ -92,17 +96,17 @@
 	</button>
 
 	{#if error}
-		<div class="text-xs text-error-600 dark:text-error-400 text-center">
+		<div class="text-center text-xs text-error-600 dark:text-error-400">
 			{error}
 		</div>
 	{/if}
 
 	{#if txHash}
-		<div class="text-xs text-surface-600 dark:text-surface-400 text-center">
-			<a 
-				href="{getChainInfo($network.chainId).explorer}/tx/{txHash}" 
-				target="_blank" 
-				class="text-primary-500 hover:text-primary-600 underline"
+		<div class="text-center text-xs text-surface-600 dark:text-surface-400">
+			<a
+				href="{getChainInfo($network.chainId as number).explorer}/tx/{txHash}"
+				target="_blank"
+				class="text-primary-500 underline hover:text-primary-600"
 			>
 				View Transaction
 			</a>

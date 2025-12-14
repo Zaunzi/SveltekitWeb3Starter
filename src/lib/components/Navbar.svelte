@@ -4,16 +4,18 @@
 	import ThemeSwitcher from './ThemeSwitcher.svelte';
 </script>
 
-<nav class="navbar bg-surface-50 dark:bg-surface-900 shadow-sm">
+<nav class="navbar bg-surface-50 shadow-sm dark:bg-surface-900">
 	<div class="container mx-auto px-2 md:px-4">
-		<div class="flex items-center justify-between h-16">
+		<div class="flex h-16 items-center justify-between">
 			<!-- Logo Section -->
 			<div class="flex items-center">
 				<a href="/" class="flex items-center space-x-2">
-					<div class="h-8 w-8 bg-primary-500 rounded-lg flex items-center justify-center text-white font-bold text-lg">
+					<div
+						class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-500 text-lg font-bold text-white"
+					>
 						SKS
 					</div>
-					<span class="text-xl font-bold text-surface-900 dark:text-surface-100 hidden md:block">
+					<span class="hidden text-xl font-bold text-surface-900 md:block dark:text-surface-100">
 						SvelteKit Web3 Starter
 					</span>
 				</a>
@@ -23,10 +25,10 @@
 			<div class="flex items-center space-x-2 md:space-x-4">
 				<!-- Theme Switcher -->
 				<ThemeSwitcher />
-				
+
 				<!-- Theme Switch (Light/Dark Mode) -->
 				<LightSwitch />
-				
+
 				<!-- Wallet Status -->
 				<WalletStatus />
 			</div>
@@ -35,5 +37,5 @@
 </nav>
 
 <style>
-/* No custom styles needed - using Skeleton's built-in surface colors */
+	/* No custom styles needed - using Skeleton's built-in surface colors */
 </style>

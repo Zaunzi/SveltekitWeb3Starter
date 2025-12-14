@@ -4,11 +4,11 @@
 
 	// Check if we're online
 	let isOnline = true;
-	
+
 	if (typeof window !== 'undefined') {
 		isOnline = navigator.onLine;
-		window.addEventListener('online', () => isOnline = true);
-		window.addEventListener('offline', () => isOnline = false);
+		window.addEventListener('online', () => (isOnline = true));
+		window.addEventListener('offline', () => (isOnline = false));
 	}
 </script>
 
@@ -16,10 +16,10 @@
 	<!-- Online/Offline Status -->
 	<div class="flex items-center space-x-1">
 		{#if isOnline}
-			<Wifi class="w-4 h-4 text-success-500" />
+			<Wifi class="h-4 w-4 text-success-500" />
 			<span class="text-xs text-success-600 dark:text-success-400">Online</span>
 		{:else}
-			<WifiOff class="w-4 h-4 text-error-500" />
+			<WifiOff class="h-4 w-4 text-error-500" />
 			<span class="text-xs text-error-600 dark:text-error-400">Offline</span>
 		{/if}
 	</div>
@@ -27,21 +27,19 @@
 	<!-- Network Status -->
 	{#if $network.chainId}
 		<div class="flex items-center space-x-1">
-			{#if isChainSupported($network.chainId)}
-				<Circle class="w-4 h-4 text-success-500" />
+			{#if isChainSupported($network.chainId as number)}
+				<Circle class="h-4 w-4 text-success-500" />
 				<span class="text-xs text-success-600 dark:text-success-400">
-					{getChainName($network.chainId)}
+					{getChainName($network.chainId as number)}
 				</span>
 			{:else}
-				<TriangleAlert class="w-4 h-4 text-warning-500" />
-				<span class="text-xs text-warning-600 dark:text-warning-400">
-					Unsupported Network
-				</span>
+				<TriangleAlert class="h-4 w-4 text-warning-500" />
+				<span class="text-xs text-warning-600 dark:text-warning-400"> Unsupported Network </span>
 			{/if}
 		</div>
 	{:else}
 		<div class="flex items-center space-x-1">
-			<TriangleAlert class="w-4 h-4 text-gray-500" />
+			<TriangleAlert class="h-4 w-4 text-gray-500" />
 			<span class="text-xs text-gray-600 dark:text-gray-400">No Network</span>
 		</div>
 	{/if}

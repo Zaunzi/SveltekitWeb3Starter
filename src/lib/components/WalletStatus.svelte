@@ -1,6 +1,15 @@
 <script lang="ts">
-	import { account, network, isWalletConnected, isLoading, error, walletActions, isChainSupported, getChainName } from '$lib/stores/walletStore';
-	import { Copy, ExternalLink, Wallet, Circle, Loader2 } from '@lucide/svelte';
+	import {
+		account,
+		network,
+		isWalletConnected,
+		isLoading,
+		error,
+		walletActions,
+		isChainSupported,
+		getChainName
+	} from '$lib/stores/walletStore';
+	import { Copy, ExternalLink, Wallet, Circle, LoaderCircle } from '@lucide/svelte';
 
 	// Format address for display
 	function formatAddress(address: string): string {
@@ -17,15 +26,16 @@
 
 	// Open address in explorer
 	function openInExplorer() {
-		if ($account.address && $network.chainId) {
-			const explorer = $network.chainId === 8453 ? 'https://basescan.org' : 'https://sepolia.basescan.org';
+		if ($account.address && ($network.chainId as number)) {
+			const explorer =
+				$network.chainId === 8453 ? 'https://basescan.org' : 'https://sepolia.basescan.org';
 			window.open(`${explorer}/address/${$account.address}`, '_blank');
 		}
 	}
 
 	// Handle network switch
 	function handleNetworkSwitch() {
-		if ($network.chainId && !isChainSupported($network.chainId)) {
+		if ($network.chainId && !isChainSupported($network.chainId as number)) {
 			walletActions.switchNetwork(84532); // Switch to Base Sepolia
 		}
 	}
@@ -38,19 +48,23 @@
 			<!-- Network Status -->
 			{#if $network.chainId}
 				<div class="flex items-center space-x-2">
-					{#if isChainSupported($network.chainId)}
-						<div class="flex items-center space-x-1 px-2 py-1 bg-success-100 dark:bg-success-900/20 border border-success-200 dark:border-success-800 rounded-md">
-							<div class="w-2 h-2 bg-success-500 rounded-full"></div>
+					{#if isChainSupported($network.chainId as number)}
+						<div
+							class="flex items-center space-x-1 rounded-md border border-success-200 bg-success-100 px-2 py-1 dark:border-success-800 dark:bg-success-900/20"
+						>
+							<div class="h-2 w-2 rounded-full bg-success-500"></div>
 							<span class="text-xs font-medium text-success-700 dark:text-success-300">
-								{getChainName($network.chainId)}
+								{getChainName($network.chainId as number)}
 							</span>
 						</div>
 					{:else}
-						<div class="flex items-center space-x-1 px-2 py-1 bg-error-100 dark:bg-error-900/20 border border-error-200 dark:border-error-800 rounded-md">
-							<Circle class="w-3 h-3 text-error-600 dark:text-error-400" />
-							<button 
-								onclick={handleNetworkSwitch} 
-								class="text-xs font-medium text-error-700 dark:text-error-300 hover:text-error-800 dark:hover:text-error-200 transition-colors"
+						<div
+							class="flex items-center space-x-1 rounded-md border border-error-200 bg-error-100 px-2 py-1 dark:border-error-800 dark:bg-error-900/20"
+						>
+							<Circle class="h-3 w-3 text-error-600 dark:text-error-400" />
+							<button
+								onclick={handleNetworkSwitch}
+								class="text-xs font-medium text-error-700 transition-colors hover:text-error-800 dark:text-error-300 dark:hover:text-error-200"
 							>
 								Switch Network
 							</button>
@@ -60,29 +74,31 @@
 			{/if}
 
 			<!-- Wallet Address -->
-			<div class="flex items-center space-x-2 px-3 py-2 bg-surface-100 dark:bg-surface-800 border border-surface-200 dark:border-surface-700 rounded-lg">
-				<Wallet class="w-4 h-4 text-surface-600 dark:text-surface-400" />
-				<span class="text-sm font-mono text-surface-700 dark:text-surface-300">
+			<div
+				class="flex items-center space-x-2 rounded-lg border border-surface-200 bg-surface-100 px-3 py-2 dark:border-surface-700 dark:bg-surface-800"
+			>
+				<Wallet class="h-4 w-4 text-surface-600 dark:text-surface-400" />
+				<span class="font-mono text-sm text-surface-700 dark:text-surface-300">
 					{formatAddress($account.address || '')}
 				</span>
 				<div class="flex items-center space-x-1">
-					<button 
+					<button
 						onclick={copyAddress}
-						class="p-1 text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 transition-colors"
+						class="p-1 text-surface-500 transition-colors hover:text-surface-700 dark:text-surface-400 dark:hover:text-surface-200"
 						title="Copy address"
 					>
-						<Copy class="w-3 h-3" />
+						<Copy class="h-3 w-3" />
 					</button>
-					<button 
+					<button
 						onclick={openInExplorer}
-						class="p-1 text-surface-500 dark:text-surface-400 hover:text-surface-700 dark:hover:text-surface-200 transition-colors"
+						class="p-1 text-surface-500 transition-colors hover:text-surface-700 dark:text-surface-400 dark:hover:text-surface-200"
 						title="View in explorer"
 					>
-						<ExternalLink class="w-3 h-3" />
+						<ExternalLink class="h-3 w-3" />
 					</button>
-					<button 
-						onclick={walletActions.disconnect} 
-						class="px-2 py-1 text-xs text-surface-600 dark:text-surface-400 hover:text-surface-900 dark:hover:text-surface-100 hover:bg-surface-200 dark:hover:bg-surface-700 rounded transition-colors"
+					<button
+						onclick={walletActions.disconnect}
+						class="rounded px-2 py-1 text-xs text-surface-600 transition-colors hover:bg-surface-200 hover:text-surface-900 dark:text-surface-400 dark:hover:bg-surface-700 dark:hover:text-surface-100"
 					>
 						Disconnect
 					</button>
@@ -91,16 +107,16 @@
 		</div>
 	{:else}
 		<!-- Disconnected State -->
-		<button 
-			onclick={walletActions.open} 
+		<button
+			onclick={walletActions.open}
 			disabled={$isLoading}
-			class="flex items-center space-x-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 disabled:bg-surface-300 dark:disabled:bg-surface-700 text-white disabled:text-surface-500 dark:disabled:text-surface-400 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md disabled:shadow-none"
+			class="flex items-center space-x-2 rounded-lg bg-primary-500 px-4 py-2 font-medium text-white shadow-sm transition-colors hover:bg-primary-600 hover:shadow-md disabled:bg-surface-300 disabled:text-surface-500 disabled:shadow-none dark:disabled:bg-surface-700 dark:disabled:text-surface-400"
 		>
 			{#if $isLoading}
-				<Loader2 class="w-4 h-4 animate-spin" />
+				<LoaderCircle class="h-4 w-4 animate-spin" />
 				<span>Connecting...</span>
 			{:else}
-				<Wallet class="w-4 h-4" />
+				<Wallet class="h-4 w-4" />
 				<span>Connect Wallet</span>
 			{/if}
 		</button>
@@ -108,12 +124,14 @@
 
 	<!-- Error Display -->
 	{#if $error}
-		<div class="flex items-center space-x-1 px-2 py-1 bg-error-100 dark:bg-error-900/20 border border-error-200 dark:border-error-800 rounded-md">
-			<Circle class="w-3 h-3 text-error-600 dark:text-error-400" />
+		<div
+			class="flex items-center space-x-1 rounded-md border border-error-200 bg-error-100 px-2 py-1 dark:border-error-800 dark:bg-error-900/20"
+		>
+			<Circle class="h-3 w-3 text-error-600 dark:text-error-400" />
 			<span class="text-xs text-error-700 dark:text-error-300">{$error}</span>
-			<button 
+			<button
 				onclick={walletActions.clearError}
-				class="text-xs text-error-600 dark:text-error-400 hover:text-error-800 dark:hover:text-error-200"
+				class="text-xs text-error-600 hover:text-error-800 dark:text-error-400 dark:hover:text-error-200"
 			>
 				×
 			</button>
