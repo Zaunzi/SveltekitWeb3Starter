@@ -3,8 +3,9 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
 		<script>
+			// TODO: Consolidate theme initialization logic - this is duplicated in ThemeSwitcher.svelte, LightSwitch.svelte, and +layout.svelte
 			// Initialize theme and mode from localStorage before page render
 			const FALLBACK_THEME = 'mint';
 			const FALLBACK_MODE = 'dark';

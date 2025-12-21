@@ -4,6 +4,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import { FALLBACK_THEME } from '$lib/constants/themes';
 	
+	// TODO: Consolidate theme initialization logic - this is duplicated in app.html, ThemeSwitcher.svelte, and LightSwitch.svelte
 	// Initialize theme and mode on layout load
 	if (browser) {
 		const mode = localStorage.getItem('mode') || 'dark';

@@ -4,8 +4,8 @@ This guide will help you set up and customize the SvelteKit Web3 Starter templat
 
 ## Prerequisites
 
-- Node.js 18 or higher
-- npm or yarn package manager
+- Node.js 20.18.0 or higher (see `.nvmrc` for exact version)
+- pnpm package manager (recommended) or npm
 - A Reown Cloud project ID (free at [cloud.reown.com](https://cloud.reown.com/))
 
 ## Quick Setup
@@ -14,8 +14,10 @@ This guide will help you set up and customize the SvelteKit Web3 Starter templat
    ```bash
    git clone <your-repo-url>
    cd template
-   npm install
+   pnpm install
    ```
+   
+   > **Note:** We recommend using [pnpm](https://pnpm.io/) for faster, more efficient package management. If you don't have pnpm installed, you can install it with `npm install -g pnpm`.
 
 2. **Set up environment variables**
    ```bash
@@ -29,7 +31,7 @@ This guide will help you set up and customize the SvelteKit Web3 Starter templat
 
 3. **Start development server**
    ```bash
-   npm run dev
+   pnpm run dev
    ```
 
 4. **Open your browser**
@@ -284,7 +286,7 @@ This template works with any platform that supports SvelteKit. Just make sure to
    - Add more networks in `src/lib/config/appkit.ts` if needed
 
 4. **Build errors**
-   - Run `npm run check` to see TypeScript errors
+   - Run `pnpm run check` to see TypeScript errors
    - Make sure all imports are correct
    - Check that all environment variables are set
 

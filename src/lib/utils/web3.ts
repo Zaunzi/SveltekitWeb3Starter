@@ -119,13 +119,14 @@ export async function estimateGas(tx: ethers.TransactionRequest): Promise<bigint
   }
 }
 
-// Get current gas price
+// Get current gas price (using feeData in ethers v6)
 export async function getGasPrice(): Promise<bigint | null> {
   const provider = getProvider();
   if (!provider) return null;
   
   try {
-    return await provider.getGasPrice();
+    const feeData = await provider.getFeeData();
+    return feeData.gasPrice || null;
   } catch (error) {
     console.error('Failed to get gas price:', error);
     return null;

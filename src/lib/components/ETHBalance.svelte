@@ -63,7 +63,7 @@
 				<div class="w-3 h-3 border-2 border-surface-300 dark:border-surface-600 border-t-primary-500 rounded-full animate-spin"></div>
 				<span class="text-xs text-surface-600 dark:text-surface-400">Loading...</span>
 			{:else if error}
-				<span class="text-xs text-red-600 dark:text-red-400">Error</span>
+				<span class="text-xs text-error-600 dark:text-error-400">Error</span>
 			{:else}
 				<span class="text-xs font-mono text-surface-700 dark:text-surface-300">
 					{formatBalance(balance)} {getChainInfo($network.chainId).symbol}

@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 
 @import '@skeletonlabs/skeleton';
-@import '@skeletonlabs/skeleton/optional/presets';
 
 /* Import all Skeleton themes */
 @import '@skeletonlabs/skeleton/themes/catppuccin';

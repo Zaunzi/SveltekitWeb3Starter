@@ -48,6 +48,7 @@
 </script>
 
 <svelte:head>
+	<!-- TODO: Remove duplicated theme initialization - consolidate with app.html and +layout.svelte -->
 	<script>
 		if (typeof window !== 'undefined') {
 			const FALLBACK_THEME = 'mint';

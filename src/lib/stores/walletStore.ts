@@ -2,27 +2,7 @@ import { writable, derived } from 'svelte/store'
 import { browser } from '$app/environment'
 import { modal } from '../config/appkit'
 import { base, baseSepolia } from '@reown/appkit/networks'
-
-// Wallet state interface
-interface WalletState {
-  account: {
-    address?: string
-    isConnected: boolean
-    chainId?: number
-    walletName?: string
-  }
-  network: {
-    chainId?: number
-    name?: string
-  }
-  theme: {
-    themeMode: string
-    themeVariables: Record<string, string>
-  }
-  isInitialized: boolean
-  isLoading: boolean
-  error?: string
-}
+import type { WalletState, ChainInfo } from '../../app.d.ts'
 
 // Initial state
 const initialState: WalletState = {
@@ -64,8 +44,7 @@ function initializeWalletStore() {
       account: {
         address: accountState.address,
         isConnected: accountState.isConnected || false,
-        chainId: accountState.caipAddress ? parseInt(accountState.caipAddress.split(':')[1]) : undefined,
-        walletName: accountState.walletName
+        chainId: accountState.caipAddress ? parseInt(accountState.caipAddress.split(':')[1]) : undefined
       },
       isLoading: false,
       error: undefined
@@ -127,12 +106,20 @@ export const walletActions = {
   },
 
   // Switch network
-  switchNetwork: (chainId: number) => {
+  switchNetwork: async (chainId: number) => {
     if (modal) {
       const targetNetwork = [base, baseSepolia].find(net => net.id === chainId)
       if (targetNetwork) {
         walletStore.update(state => ({ ...state, isLoading: true, error: undefined }))
-        modal.switchNetwork(targetNetwork)
+        try {
+          await modal.switchNetwork(targetNetwork)
+        } catch (err) {
+          walletStore.update(state => ({
+            ...state,
+            isLoading: false,
+            error: err instanceof Error ? err.message : 'Failed to switch network'
+          }))
+        }
       }
     }
   },
@@ -193,7 +180,7 @@ export const getChainName = (chainId: number) => {
   }
 }
 
-export const getChainInfo = (chainId: number) => {
+export const getChainInfo = (chainId: number): ChainInfo => {
   switch (chainId) {
     case base.id:
       return { name: 'Base', symbol: 'ETH', decimals: 18, explorer: 'https://basescan.org' }

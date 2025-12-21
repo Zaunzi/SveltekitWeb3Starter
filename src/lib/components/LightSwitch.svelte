@@ -7,6 +7,9 @@
     import IconSun from '@lucide/svelte/icons/sun';
   
     let checked = $state(false);
+    
+    // Type assertion for Switch component - Skeleton v4 snippets work at runtime but type definitions may lag
+    const SwitchComponent = Switch as any;
   
     $effect(() => {
       if (!browser) return;
@@ -42,6 +45,7 @@
   </script>
   
   <svelte:head>
+    <!-- TODO: Remove duplicated mode initialization - consolidate with app.html and +layout.svelte -->
     <script>
       if (typeof window !== 'undefined') {
         const mode = localStorage.getItem('mode') || 'dark';
@@ -50,11 +54,11 @@
     </script>
   </svelte:head>
   
-  <Switch 
+  <SwitchComponent 
     name="mode"  
-    {checked} 
+    checked={checked} 
     onCheckedChange={onCheckedChange}
   >
     {#snippet inactiveChild()}<IconSun size="14" />{/snippet}
     {#snippet activeChild()}<IconMoon size="14" />{/snippet}
-  </Switch>
+  </SwitchComponent>

@@ -21,9 +21,34 @@ A production-ready SvelteKit template for building Web3 dApps with Reown AppKit,
 
 ### Prerequisites
 
-- Node.js 18+ 
-- npm or yarn
+- **Node.js 20.19.0+ or 22.12.0+** (see `.nvmrc` for recommended version)
+  - We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions
+  - Run `nvm use` after cloning to automatically use the correct version
+- **pnpm** (strongly recommended) - see installation instructions below
 - A Reown Cloud project ID
+
+### Installing pnpm
+
+This project uses **pnpm** as the package manager. pnpm offers significant advantages:
+
+- 🚀 **Faster installs** - Up to 2x faster than npm
+- 💾 **Disk space efficient** - Uses hard links to save disk space
+- 🔒 **Strict dependency resolution** - Prevents phantom dependencies
+- ✅ **Better monorepo support** - Excellent for large projects
+
+**Install pnpm:**
+```bash
+# Using npm
+npm install -g pnpm
+
+# Using Homebrew (macOS)
+brew install pnpm
+
+# Using standalone script
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
+
+> ⚠️ **Important:** While npm may work, we strongly recommend using pnpm for the best experience. The project is configured and tested with pnpm.
 
 ### Setup
 
@@ -33,14 +58,24 @@ A production-ready SvelteKit template for building Web3 dApps with Reown AppKit,
    cd template
    ```
 
-2. **Install dependencies**
+2. **Use the correct Node.js version**
    ```bash
-   npm install
+   # If using nvm
+   nvm use
+   
+   # Or manually install/use Node.js 20.19.0+
+   nvm install 20.19.0
+   nvm use 20.19.0
    ```
 
-3. **Set up environment variables**
+3. **Install dependencies**
    ```bash
-   cp .env.example .env
+   pnpm install
+   ```
+
+4. **Set up environment variables**
+   ```bash
+   cp env.example .env
    ```
    
    Get your project ID from [Reown Cloud](https://cloud.reown.com/) and add it to `.env`:
@@ -48,12 +83,12 @@ A production-ready SvelteKit template for building Web3 dApps with Reown AppKit,
    VITE_PROJECT_ID=your_project_id_here
    ```
 
-4. **Start the development server**
+5. **Start the development server**
    ```bash
-   npm run dev
+   pnpm run dev
    ```
 
-5. **Open your browser**
+6. **Open your browser**
    Navigate to [http://localhost:5173](http://localhost:5173)
 
 ## Project Structure
@@ -105,8 +140,8 @@ if ($isWalletConnected) {
 // Open wallet modal
 walletActions.open();
 
-// Switch network
-walletActions.switchNetwork(8453); // Base mainnet
+// Switch network (async)
+await walletActions.switchNetwork(8453); // Base mainnet
 ```
 
 ### Blockchain Interactions
@@ -143,11 +178,21 @@ modal.setThemeMode('light');
 
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run check` - Run TypeScript checks
-- `npm run lint` - Run ESLint and Prettier
+All scripts should be run with `pnpm`:
+
+- `pnpm run dev` - Start development server
+- `pnpm run build` - Build for production
+- `pnpm run preview` - Preview production build
+- `pnpm run check` - Run TypeScript checks (ensures zero errors/warnings)
+- `pnpm run check:watch` - Run TypeScript checks in watch mode
+
+### Code Quality
+
+This project includes pre-commit hooks (via Husky) that automatically:
+- Run TypeScript type checking (`pnpm run check`)
+- Lint and format staged files with ESLint and Prettier
+
+This ensures code quality and prevents commits with errors or warnings.
 
 ## Supported Networks
 
@@ -228,6 +273,35 @@ Theme toggle component for switching between light and dark modes.
 <LightSwitch />
 ```
 
+## Development Tips
+
+### Using pnpm Commands
+
+Replace any `npm` commands with `pnpm`:
+
+```bash
+# Install dependencies
+pnpm install
+
+# Add a new dependency
+pnpm add <package-name>
+
+# Add a dev dependency
+pnpm add -D <package-name>
+
+# Remove a dependency
+pnpm remove <package-name>
+```
+
+### Node.js Version Management
+
+If you're using nvm, the project includes a `.nvmrc` file. Simply run:
+```bash
+nvm use
+```
+
+This will automatically switch to the correct Node.js version (20.19.0).
+
 ## Learn More
 
 - [SvelteKit Documentation](https://kit.svelte.dev/docs)
@@ -235,6 +309,7 @@ Theme toggle component for switching between light and dark modes.
 - [Reown AppKit Documentation](https://docs.reown.com/appkit)
 - [Ethers.js Documentation](https://docs.ethers.org/)
 - [Base Network Documentation](https://docs.base.org/)
+- [pnpm Documentation](https://pnpm.io/)
 
 ## License
 

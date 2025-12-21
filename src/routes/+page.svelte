@@ -62,7 +62,7 @@
 					</div>
 					<div class="card-content">
 						<div class="space-y-2">
-							<p class="text-green-600 dark:text-green-400 font-medium">✅ Connected</p>
+							<p class="text-success-600 dark:text-success-400 font-medium">✅ Connected</p>
 							<p class="text-sm text-surface-600 dark:text-surface-400">
 								Address: {formatAddress($account.address || '')}
 							</p>

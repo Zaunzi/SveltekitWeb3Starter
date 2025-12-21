@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import { account, network, isChainSupported } from '$lib/stores/walletStore';
+	import { account, network, isChainSupported, getChainInfo } from '$lib/stores/walletStore';
 	import { walletActions } from '$lib/stores/walletStore';
 	import { ethers } from 'ethers';
 	import { Loader2, CheckCircle, XCircle } from '@lucide/svelte';
@@ -9,9 +9,9 @@
 
 	const dispatch = createEventDispatcher();
 
-	let txHash = '';
-	let txStatus: 'pending' | 'success' | 'error' | null = null;
-	let error = '';
+	let txHash = $state('');
+	let txStatus = $state<'pending' | 'success' | 'error' | null>(null);
+	let error = $state('');
 
 	// Example transaction function - customize this for your needs
 	async function sendTransaction() {
@@ -74,17 +74,17 @@
 <div class="flex flex-col space-y-2">
 	<button
 		onclick={sendTransaction}
-		disabled={disabled || loading || !$account.isConnected || !isChainSupported($network.chainId)}
+		disabled={disabled || loading || !$account.isConnected || !$network.chainId || !isChainSupported($network.chainId)}
 		class="flex items-center justify-center space-x-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 disabled:bg-surface-300 dark:disabled:bg-surface-700 text-white disabled:text-surface-500 dark:disabled:text-surface-400 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md disabled:shadow-none"
 	>
 		{#if loading}
 			<Loader2 class="w-4 h-4 animate-spin" />
 			<span>Processing...</span>
 		{:else if txStatus === 'success'}
-			<CheckCircle class="w-4 h-4 text-green-500" />
+			<CheckCircle class="w-4 h-4 text-success-500" />
 			<span>Success!</span>
 		{:else if txStatus === 'error'}
-			<XCircle class="w-4 h-4 text-red-500" />
+			<XCircle class="w-4 h-4 text-error-500" />
 			<span>Failed</span>
 		{:else}
 			<span>{children}</span>
@@ -92,12 +92,12 @@
 	</button>
 
 	{#if error}
-		<div class="text-xs text-red-600 dark:text-red-400 text-center">
+		<div class="text-xs text-error-600 dark:text-error-400 text-center">
 			{error}
 		</div>
 	{/if}
 
-	{#if txHash}
+	{#if txHash && $network.chainId}
 		<div class="text-xs text-surface-600 dark:text-surface-400 text-center">
 			<a 
 				href="{getChainInfo($network.chainId).explorer}/tx/{txHash}" 

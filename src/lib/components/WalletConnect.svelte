@@ -9,10 +9,10 @@
 	}
 
 	// Handle network switch
-	function handleNetworkSwitch() {
+	async function handleNetworkSwitch() {
 		if ($network.chainId && !isChainSupported($network.chainId)) {
 			// Switch to Base Sepolia if on unsupported network
-			walletActions.switchNetwork(84532); // Base Sepolia chain ID
+			await walletActions.switchNetwork(84532); // Base Sepolia chain ID
 		}
 	}
 
@@ -43,18 +43,18 @@
 			{#if $network.chainId}
 				<div class="flex items-center space-x-2">
 					{#if isChainSupported($network.chainId)}
-						<div class="flex items-center space-x-1 px-2 py-1 bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md">
-							<div class="w-2 h-2 bg-green-500 rounded-full"></div>
-							<span class="text-xs font-medium text-green-700 dark:text-green-300">
+						<div class="flex items-center space-x-1 px-2 py-1 bg-success-100 dark:bg-success-900/20 border border-success-200 dark:border-success-800 rounded-md">
+							<div class="w-2 h-2 bg-success-500 rounded-full"></div>
+							<span class="text-xs font-medium text-success-700 dark:text-success-300">
 								{getChainName($network.chainId)}
 							</span>
 						</div>
 					{:else}
-						<div class="flex items-center space-x-1 px-2 py-1 bg-red-100 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
-							<AlertCircle class="w-3 h-3 text-red-600 dark:text-red-400" />
+						<div class="flex items-center space-x-1 px-2 py-1 bg-error-100 dark:bg-error-900/20 border border-error-200 dark:border-error-800 rounded-md">
+							<AlertCircle class="w-3 h-3 text-error-600 dark:text-error-400" />
 							<button 
 								onclick={handleNetworkSwitch} 
-								class="text-xs font-medium text-red-700 dark:text-red-300 hover:text-red-800 dark:hover:text-red-200 transition-colors"
+								class="text-xs font-medium text-error-700 dark:text-error-300 hover:text-error-800 dark:hover:text-error-200 transition-colors"
 							>
 								Switch Network
 							</button>

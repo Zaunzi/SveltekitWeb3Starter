@@ -4,15 +4,7 @@
 	import { ethers } from 'ethers';
 	import { createEventDispatcher } from 'svelte';
 	import { Loader2, CheckCircle, XCircle } from '@lucide/svelte';
-
-	interface Props {
-		contractAddress: string;
-		abi: any[];
-		functionName: string;
-		args?: any[];
-		value?: string;
-		children: any;
-	}
+	import type { ContractInteractionProps } from '../../app.d.ts';
 
 	let { 
 		contractAddress, 
@@ -20,15 +12,16 @@
 		functionName, 
 		args = [], 
 		value = '0',
+		disabled = false,
 		children
-	}: Props = $props();
+	}: ContractInteractionProps = $props();
 
 	const dispatch = createEventDispatcher();
 
-	let loading = false;
-	let error = '';
-	let txHash = '';
-	let txStatus: 'pending' | 'success' | 'error' | null = null;
+	let loading = $state(false);
+	let error = $state('');
+	let txHash = $state('');
+	let txStatus = $state<'pending' | 'success' | 'error' | null>(null);
 
 	// Execute contract function
 	async function executeContractFunction() {
@@ -91,17 +84,17 @@
 <div class="space-y-4">
 	<button
 		onclick={executeContractFunction}
-		disabled={disabled || loading || !$account.isConnected || !isChainSupported($network.chainId) || !contractAddress || !abi || !functionName}
+		disabled={disabled || loading || !$account.isConnected || !$network.chainId || !isChainSupported($network.chainId) || !contractAddress || !abi || !functionName}
 		class="flex items-center justify-center space-x-2 px-4 py-2 bg-primary-500 hover:bg-primary-600 disabled:bg-surface-300 dark:disabled:bg-surface-700 text-white disabled:text-surface-500 dark:disabled:text-surface-400 rounded-lg font-medium transition-colors shadow-sm hover:shadow-md disabled:shadow-none"
 	>
 		{#if loading}
 			<Loader2 class="w-4 h-4 animate-spin" />
 			<span>Processing...</span>
 		{:else if txStatus === 'success'}
-			<CheckCircle class="w-4 h-4 text-green-500" />
+			<CheckCircle class="w-4 h-4 text-success-500" />
 			<span>Success!</span>
 		{:else if txStatus === 'error'}
-			<XCircle class="w-4 h-4 text-red-500" />
+			<XCircle class="w-4 h-4 text-error-500" />
 			<span>Failed</span>
 		{:else}
 			{@render children()}
@@ -109,12 +102,12 @@
 	</button>
 
 	{#if error}
-		<div class="p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
-			<p class="text-sm text-red-700 dark:text-red-300">{error}</p>
+		<div class="p-3 bg-error-50 dark:bg-error-900/20 border border-error-200 dark:border-error-800 rounded-lg">
+			<p class="text-sm text-error-700 dark:text-error-300">{error}</p>
 		</div>
 	{/if}
 
-	{#if txHash}
+	{#if txHash && $network.chainId}
 		<div class="text-xs text-surface-600 dark:text-surface-400 text-center">
 			<a 
 				href="{getChainInfo($network.chainId).explorer}/tx/{txHash}" 
