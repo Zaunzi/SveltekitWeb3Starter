@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-
+@import '@skeletonlabs/skeleton-svelte';
 @import '@skeletonlabs/skeleton';
 
 /* Import all Skeleton themes */
@@ -27,7 +27,7 @@
 @import '@skeletonlabs/skeleton/themes/wintry';
 
 /* Configure Tailwind dark mode to use data attribute strategy */
-@custom-variant dark (&:where([data-mode=dark], [data-mode=dark] *));
+@custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));
 
 /* stylelint-disable-next-line at-rule-no-unknown */
 @source '../node_modules/@skeletonlabs/skeleton-svelte/dist';
