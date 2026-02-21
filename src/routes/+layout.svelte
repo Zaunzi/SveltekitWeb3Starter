@@ -18,7 +18,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href="/favicon.svg" />
+	<link rel="icon" href="/SKSFAVICON.svg" type="image/svg+xml" />
 </svelte:head>
 
 <Navbar />

@@ -13,7 +13,7 @@
 	const jsonLd = {
 		'@context': 'https://schema.org',
 		'@type': 'SoftwareSourceCode',
-		name: 'sveltekit web3 starter',
+		name: 'Sveltekit Web3 Starter',
 		description: 'A production-ready SvelteKit template for building Web3 dApps with Reown AppKit, Ethers, and Skeleton UI.',
 		url: 'https://sveltekit-web3-starter.vercel.app/',
 		codeRepository: 'https://github.com/Zaunzi/SveltekitWeb3Starter',
@@ -23,7 +23,7 @@
 </script>
 
 <svelte:head>
-	<title>sveltekit web3 starter</title>
+	<title>Sveltekit Web3 Starter</title>
 	<meta name="description" content="A production-ready SvelteKit template for building Web3 dApps with Reown AppKit, Ethers, and Skeleton UI. Wallet integration, multi-chain support, and modern UI out of the box." />
 	<meta name="keywords" content="sveltekit, web3, dapp, ethereum, reown, appkit, ethers, skeleton ui, base, wallet connect" />
 	<link rel="canonical" href="https://sveltekit-web3-starter.vercel.app/" />
