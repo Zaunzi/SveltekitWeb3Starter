@@ -2,6 +2,27 @@
 @import '@skeletonlabs/skeleton-svelte';
 @import '@skeletonlabs/skeleton';
 
+/* AAVEGOTCHi custom font for branding (src/font/) */
+@font-face {
+	font-family: 'AAVEGOTCHi';
+	src: url('./font/AAVEGOTCHi_FONT_V1.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+
+.font-aavegotchi {
+	font-family: 'AAVEGOTCHi', system-ui, sans-serif;
+	letter-spacing: 0.02em;
+	line-height: 1.2;
+}
+
+/* Section headings with AAVEGOTCHi font (use with lowercase text) */
+.h2-aavegotchi {
+	font-family: 'AAVEGOTCHi', system-ui, sans-serif;
+	text-transform: lowercase;
+}
+
 /* Import all Skeleton themes */
 @import '@skeletonlabs/skeleton/themes/catppuccin';
 @import '@skeletonlabs/skeleton/themes/cerberus';
@@ -25,6 +46,8 @@
 @import '@skeletonlabs/skeleton/themes/vintage';
 @import '@skeletonlabs/skeleton/themes/vox';
 @import '@skeletonlabs/skeleton/themes/wintry';
+@import '$lib/blackpink.css';
+@import '$lib/bol.css';
 
 /* Configure Tailwind dark mode to use data attribute strategy */
 @custom-variant dark (&:where([data-mode="dark"], [data-mode="dark"] *));

@@ -101,7 +101,11 @@
 							onclick={() => selectTheme(theme.name)}
 							type="button"
 						>
-							<span class="text-2xl">{theme.emoji}</span>
+							{#if theme.icon}
+								<img src={theme.icon} alt="" class="h-8 w-8 object-contain" />
+							{:else}
+								<span class="text-2xl">{theme.emoji}</span>
+							{/if}
 							<span class="text-xs capitalize">{theme.name}</span>
 							<!-- Color preview -->
 							<div class="flex justify-center items-center -space-x-1 mt-1">

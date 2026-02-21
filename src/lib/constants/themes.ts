@@ -1,4 +1,10 @@
-export const themes = [
+export type Theme = {
+	name: string;
+	emoji: string;
+	icon?: string;
+};
+
+export const themes: Theme[] = [
 	{
 		name: 'catppuccin',
 		emoji: '🐈',
@@ -87,7 +93,17 @@ export const themes = [
 		name: 'wintry',
 		emoji: '🌨️',
 	},
-] as const;
+	{
+		name: 'blackpink',
+		emoji: '🖤',
+		icon: '/blackpinkicon.png',
+	},
+	{
+		name: 'bol',
+		emoji: '🧢',
+		icon: '/bolanaicon.png',
+	},
+];
 
 export const FALLBACK_THEME = 'mint';
 

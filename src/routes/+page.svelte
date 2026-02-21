@@ -8,31 +8,67 @@
 		if (!address) return '';
 		return `${address.slice(0, 6)}...${address.slice(-4)}`;
 	}
+
+	// JSON-LD structured data for SEO
+	const jsonLd = {
+		'@context': 'https://schema.org',
+		'@type': 'SoftwareSourceCode',
+		name: 'sveltekit web3 starter',
+		description: 'A production-ready SvelteKit template for building Web3 dApps with Reown AppKit, Ethers, and Skeleton UI.',
+		url: 'https://sveltekit-web3-starter.vercel.app/',
+		codeRepository: 'https://github.com/Zaunzi/SveltekitWeb3Starter',
+		programmingLanguage: 'TypeScript',
+		author: { '@type': 'Organization', name: 'Zaunzi', url: 'https://github.com/Zaunzi' }
+	};
 </script>
 
 <svelte:head>
-	<title>SvelteKit Web3 Starter</title>
-	<meta name="description" content="A production-ready SvelteKit template for building Web3 dApps with Reown AppKit and Ethers" />
+	<title>sveltekit web3 starter</title>
+	<meta name="description" content="A production-ready SvelteKit template for building Web3 dApps with Reown AppKit, Ethers, and Skeleton UI. Wallet integration, multi-chain support, and modern UI out of the box." />
+	<meta name="keywords" content="sveltekit, web3, dapp, ethereum, reown, appkit, ethers, skeleton ui, base, wallet connect" />
+	<link rel="canonical" href="https://sveltekit-web3-starter.vercel.app/" />
+	<!-- Open Graph -->
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="sveltekit web3 starter" />
+	<meta property="og:description" content="A production-ready SvelteKit template for building Web3 dApps with Reown AppKit, Ethers, and Skeleton UI." />
+	<meta property="og:url" content="https://sveltekit-web3-starter.vercel.app/" />
+	<meta property="og:site_name" content="sveltekit web3 starter" />
+	<!-- Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="sveltekit web3 starter" />
+	<meta name="twitter:description" content="A production-ready SvelteKit template for building Web3 dApps with Reown AppKit, Ethers, and Skeleton UI." />
+	<!-- JSON-LD for rich results -->
+	{@html '<script type="application/ld+json">' + JSON.stringify(jsonLd) + '</script>'}
 </svelte:head>
 
-<div class="container mx-auto px-4 py-8">
-	<div class="max-w-4xl mx-auto">
-		<!-- Hero Section -->
-		<div class="text-center mb-12">
-			<h1 class="text-4xl md:text-6xl font-bold text-surface-900 dark:text-surface-100 mb-4">
-				SvelteKit Web3 Starter
-			</h1>
-			<p class="text-lg text-surface-600 dark:text-surface-400 mb-8">
-				A production-ready template for building Web3 dApps with SvelteKit, Reown AppKit, and Ethers
-			</p>
-		</div>
+<div class="min-h-screen bg-linear-to-b from-surface-100 to-surface-50 dark:from-surface-950 dark:to-surface-900">
+	<div class="container mx-auto px-4 py-10 md:py-14">
+		<div class="max-w-4xl mx-auto">
+			<!-- Hero Section -->
+			<section class="text-center mb-16 md:mb-20">
+				<h1 class="font-aavegotchi text-4xl md:text-6xl lg:text-7xl font-bold text-surface-900 dark:text-surface-100 mb-5 lowercase tracking-tight">
+					sveltekit web3 starter
+				</h1>
+				<p class="text-lg md:text-xl text-surface-600 dark:text-surface-400 mb-7 max-w-2xl mx-auto leading-relaxed">
+					A production-ready template for building Web3 dApps with SvelteKit, Reown AppKit, and Ethers
+				</p>
+				<a
+					href="https://github.com/Zaunzi/SveltekitWeb3Starter"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="inline-flex items-center gap-2 btn preset-filled border border-primary-500 text-primary-contrast-500 hover:opacity-90 transition-opacity"
+				>
+					View on GitHub
+					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+				</a>
+			</section>
 
-		<!-- Welcome Message -->
-		<div class="card mb-8">
-			<div class="card-header">
-				<h3 class="card-title">🚀 Welcome to Your Web3 DApp</h3>
+			<!-- Welcome Message -->
+			<section class="card mb-10 shadow-lg shadow-surface-900/5 dark:shadow-black/20 border border-surface-200-800 rounded-xl overflow-hidden transition-shadow hover:shadow-xl hover:shadow-surface-900/10">
+			<div class="card-header bg-surface-100/80 dark:bg-surface-800/80 py-4 px-5">
+				<h2 class="card-title font-aavegotchi text-2xl lowercase m-0">welcome to your web3 dapp</h2>
 			</div>
-			<div class="card-content">
+			<div class="card-content p-5 md:p-6">
 				<div class="space-y-4">
 					<p class="text-surface-600 dark:text-surface-400">
 						This template provides everything you need to build a production-ready Web3 dApp:
@@ -50,17 +86,17 @@
 					</p>
 				</div>
 			</div>
-		</div>
+		</section>
 
 		<!-- Wallet Status -->
 		{#if $isWalletConnected}
-			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
 				<!-- Connection Status -->
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">Wallet Connected</h3>
+				<div class="card shadow-lg shadow-surface-900/5 dark:shadow-black/20 border border-surface-200-800 rounded-xl overflow-hidden transition-shadow hover:shadow-xl">
+					<div class="card-header bg-surface-100/80 dark:bg-surface-800/80 py-4 px-5">
+						<h2 class="card-title font-aavegotchi text-xl lowercase m-0">wallet connected</h2>
 					</div>
-					<div class="card-content">
+					<div class="card-content p-5 md:p-6">
 						<div class="space-y-2">
 							<p class="text-success-600 dark:text-success-400 font-medium">✅ Connected</p>
 							<p class="text-sm text-surface-600 dark:text-surface-400">
@@ -74,22 +110,22 @@
 				</div>
 
 				<!-- ETH Balance -->
-				<div class="card">
-					<div class="card-header">
-						<h3 class="card-title">ETH Balance</h3>
+				<div class="card shadow-lg shadow-surface-900/5 dark:shadow-black/20 border border-surface-200-800 rounded-xl overflow-hidden transition-shadow hover:shadow-xl">
+					<div class="card-header bg-surface-100/80 dark:bg-surface-800/80 py-4 px-5">
+						<h2 class="card-title font-aavegotchi text-xl lowercase m-0">eth balance</h2>
 					</div>
-					<div class="card-content">
+					<div class="card-content p-5 md:p-6">
 						<ETHBalance />
 					</div>
 				</div>
 			</div>
 		{:else}
 			<!-- Not Connected State -->
-			<div class="card mb-8">
-				<div class="card-header">
-					<h3 class="card-title">Connect Your Wallet</h3>
+			<div class="card mb-10 shadow-lg shadow-surface-900/5 dark:shadow-black/20 border border-surface-200-800 rounded-xl overflow-hidden transition-shadow hover:shadow-xl">
+				<div class="card-header bg-surface-100/80 dark:bg-surface-800/80 py-4 px-5">
+					<h2 class="card-title font-aavegotchi text-xl lowercase m-0">connect your wallet</h2>
 				</div>
-				<div class="card-content">
+				<div class="card-content p-5 md:p-6">
 					<div class="text-center space-y-4">
 						<p class="text-surface-600 dark:text-surface-400">
 							Connect your wallet to interact with your Web3 dApp
@@ -103,11 +139,11 @@
 		{/if}
 
 		<!-- Getting Started -->
-		<div class="card mb-8">
-			<div class="card-header">
-				<h3 class="card-title">🛠️ Getting Started</h3>
+		<section class="card mb-10 shadow-lg shadow-surface-900/5 dark:shadow-black/20 border border-surface-200-800 rounded-xl overflow-hidden transition-shadow hover:shadow-xl">
+			<div class="card-header bg-surface-100/80 dark:bg-surface-800/80 py-4 px-5">
+				<h2 class="card-title font-aavegotchi text-2xl lowercase m-0">getting started</h2>
 			</div>
-			<div class="card-content">
+			<div class="card-content p-5 md:p-6">
 				<div class="space-y-4">
 					<p class="text-surface-600 dark:text-surface-400">
 						Ready to build your Web3 dApp? Here's what you need to do:
@@ -124,14 +160,14 @@
 					</p>
 				</div>
 			</div>
-		</div>
+		</section>
 
 		<!-- Testnet Faucets -->
-		<div class="card">
-			<div class="card-header">
-				<h3 class="card-title">🚰 Get Testnet ETH</h3>
+		<section class="card shadow-lg shadow-surface-900/5 dark:shadow-black/20 border border-surface-200-800 rounded-xl overflow-hidden transition-shadow hover:shadow-xl">
+			<div class="card-header bg-surface-100/80 dark:bg-surface-800/80 py-4 px-5">
+				<h2 class="card-title font-aavegotchi text-2xl lowercase m-0">get testnet eth</h2>
 			</div>
-			<div class="card-content">
+			<div class="card-content p-5 md:p-6">
 				<div class="space-y-4">
 					<p class="text-surface-600 dark:text-surface-400">
 						Need Base Sepolia testnet ETH for development? Use these faucets to get free testnet funds:
@@ -201,6 +237,22 @@
 					</p>
 				</div>
 			</div>
+		</section>
+
+			<!-- Footer -->
+			<footer class="mt-16 pt-8 border-t border-surface-200-800 text-center">
+				<p class="text-sm text-surface-500 dark:text-surface-500 mb-2">
+					Template by <a href="https://github.com/Zaunzi" target="_blank" rel="noopener noreferrer" class="text-primary-500 hover:text-primary-600 underline">Zaunzi</a>
+				</p>
+				<a
+					href="https://github.com/Zaunzi/SveltekitWeb3Starter"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="text-sm text-primary-500 hover:text-primary-600 underline"
+				>
+					github.com/Zaunzi/SveltekitWeb3Starter
+				</a>
+			</footer>
 		</div>
 	</div>
 </div>
