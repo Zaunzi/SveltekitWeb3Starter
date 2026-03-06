@@ -105,5 +105,5 @@ export const themes: Theme[] = [
 	},
 ];
 
-export const FALLBACK_THEME = 'mint';
+export const FALLBACK_THEME = 'bol';
 

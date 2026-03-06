@@ -51,7 +51,7 @@
 	<!-- TODO: Remove duplicated theme initialization - consolidate with app.html and +layout.svelte -->
 	<script>
 		if (typeof window !== 'undefined') {
-			const FALLBACK_THEME = 'mint';
+			const FALLBACK_THEME = 'bol';
 			const storedTheme = localStorage.getItem('theme');
 			const theme = storedTheme ?? FALLBACK_THEME;
 			document.documentElement.setAttribute('data-theme', theme);
