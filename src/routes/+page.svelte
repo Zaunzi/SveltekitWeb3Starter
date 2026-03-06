@@ -33,8 +33,12 @@
 	<meta property="og:description" content="A production-ready SvelteKit template for building Web3 dApps with Reown AppKit, Ethers, and Skeleton UI." />
 	<meta property="og:url" content="https://www.sks3.lol/" />
 	<meta property="og:site_name" content="sveltekit web3 starter" />
+	<meta property="og:image" content="https://www.sks3.lol/sksogimage.png" />
+	<meta property="og:image:alt" content="Sveltekit Web 3 Starter - production-ready SvelteKit template for Web3 dApps" />
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content="https://www.sks3.lol/sksogimage.png" />
+	<meta name="twitter:image:alt" content="Sveltekit Web 3 Starter - production-ready SvelteKit template for Web3 dApps" />
 	<meta name="twitter:title" content="sveltekit web3 starter" />
 	<meta name="twitter:description" content="A production-ready SvelteKit template for building Web3 dApps with Reown AppKit, Ethers, and Skeleton UI." />
 	<!-- JSON-LD for rich results -->
@@ -242,7 +246,7 @@
 			<!-- Footer -->
 			<footer class="mt-16 pt-8 border-t border-surface-200-800 text-center">
 				<p class="text-sm text-surface-500 dark:text-surface-500 mb-2">
-					Template by <a href="https://github.com/Zaunzi" target="_blank" rel="noopener noreferrer" class="text-primary-500 hover:text-primary-600 underline">Zaunzi</a>
+					Template by <a href="https://github.com/Zaunzi" target="_blank" rel="noopener noreferrer" class="text-primary-500 hover:text-primary-600 underline">Zaunzi</a> and <a href="https://github.com/Elliott-Green" target="_blank" rel="noopener noreferrer" class="text-primary-500 hover:text-primary-600 underline">CryptoNines</a>
 				</p>
 				<a
 					href="https://github.com/Zaunzi/SveltekitWeb3Starter"
